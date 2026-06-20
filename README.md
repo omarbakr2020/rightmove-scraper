@@ -98,6 +98,76 @@ JOIN listings l ON l.id = ph.listing_id
 ORDER BY ph.observed_at DESC LIMIT 10;
 ```
 
+## Sample Output
+
+Three listings from a London development run (`MAX_PAGES=3`):
+
+```json
+[
+  {
+    "url": "https://www.rightmove.co.uk/properties/88659360",
+    "display_address": "High Road, North Finchley, N12",
+    "price": 285000,
+    "price_raw": "£285,000",
+    "property_type": "Apartment",
+    "bedrooms": 1,
+    "description_preview": "A beautiful one bedroom first floor purpose-built lift serviced apartment set back off North Finchley High Road, within easy access to multiple shopping and transport facilities, East Finchley Tube St",
+    "agent_branch_display_name": "Adam Hayes Estate Agents, North Finchley, N12",
+    "key_features": [
+      "One Bedroom",
+      "First Floor Apartment",
+      "Modern Kitchen",
+      "Chain Free",
+      "Communal Gardens",
+      "Secure Gated Allocated Parking"
+    ]
+  },
+  {
+    "url": "https://www.rightmove.co.uk/properties/174328301",
+    "display_address": "Pan Peninsula Square, Canary Wharf, London, E14",
+    "price": 375000,
+    "price_raw": "£375,000",
+    "property_type": "Flat",
+    "bedrooms": 1,
+    "description_preview": "Luxury one bedroom apartment set within the stunning East Tower of Pan Peninsula, spacious open plan living room with a private balcony, a well-equipped open plan stylish kitchen, modern bedroom with",
+    "agent_branch_display_name": "Chase Evans, Pan Peninsula",
+    "key_features": [
+      "LUXURY ONE BEDROOM",
+      "BALCONY",
+      "ONSITE LEISURE & FITNESS FACILITIES",
+      "24-HOUR CONCIERGE",
+      "CLOSE TO ALL THE AMENITIES",
+      "0.1 MI TO SOUTH QUAY DLR",
+      "0.5 MI TO CANARY WHARF STATION"
+    ]
+  },
+  {
+    "url": "https://www.rightmove.co.uk/properties/89949297",
+    "display_address": "Skyline Apartments, Makers Yard, London",
+    "price": 370000,
+    "price_raw": "£370,000",
+    "property_type": "Flat",
+    "bedrooms": 1,
+    "description_preview": "A beautifully designed apartment within the sought-after Three Waters development, offering contemporary living in a vibrant waterside setting. The property features a bright open-plan living and dini",
+    "agent_branch_display_name": "Imperial Dragon Property Management, London",
+    "key_features": [
+      "Spacious high floor unit",
+      "Open city view",
+      "Great condition"
+    ]
+  }
+]
+```
+
+Full image URLs are stored in the `listing_images` table. Query with:
+
+```sql
+SELECT l.display_address, i.position, i.url_large
+FROM listings l
+JOIN listing_images i ON i.listing_id = l.id
+ORDER BY l.id, i.position;
+```
+
 ## Project structure
 
 ```
